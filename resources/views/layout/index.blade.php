@@ -22,6 +22,15 @@
           <li class="nav-item">
             <a href="#" class="nav-link">Home</a>
           </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              Authors
+            </a>
+            <div class="dropdown-menu">
+              <a href="{{ route('author.create') }}" class="dropdown-item">New author</a>
+              <a href="{{ route('author.index') }}" class="dropdown-item">All</a>
+            </div>
+          </li>
         @endauth
       </ul>
       <ul class="navbar-nav">

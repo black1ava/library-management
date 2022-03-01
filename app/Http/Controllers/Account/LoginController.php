@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
+use App\Http\Requests\LoginPostRequest;
 
 class LoginController extends Controller
 {
@@ -15,5 +16,16 @@ class LoginController extends Controller
         }
         
         return view('accounts.login');
+    }
+
+    public function login(Request $request){
+        $credential = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt($credential)){
+            return redirect()->route('home');
+        }
     }
 }

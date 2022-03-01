@@ -6,6 +6,7 @@
         <h3>Login</h3>
       </div>
       <form action="" method="post">
+        @csrf
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" name="email" id="email" class="form-control">

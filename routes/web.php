@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Account\RegisterController;
 use App\Http\Controllers\Account\LoginController;
 use App\Http\Controllers\Account\LogoutController;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::prefix('/account')->group(function(){
     Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login.show');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
 
     Route::delete('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
+
+Route::resource('/author', AuthorController::class);
