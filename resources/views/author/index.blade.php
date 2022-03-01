@@ -20,7 +20,22 @@
           </tr>
         </thead>
         <tbody>
-
+          @foreach($authors as $author)
+            <tr>
+              <td>
+                <a href="{{ route('author.show', $author) }}" class="card-link">
+                  {{ $author->id }}
+                </a>
+              </td>
+              <td>{{ $author->name }}</td>
+              <td>{{ $author->gender }}</td>
+              <td>{{ $author->dob }}</td>
+              <td>{{ $author->pob }}</td>
+              <td>{{ $author->address }}</td>
+              <td>{{ $author->phone }}</td>
+              <td>{{ $author->email }}</td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
