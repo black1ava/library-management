@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('gender');
             $table->date('dob');
-            $table->date('pob');
+            $table->string('pob');
             $table->string('address');
             $table->string('phone');
             $table->string('photo')->nullable();

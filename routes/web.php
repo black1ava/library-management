@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Account\RegisterController;
 use App\Http\Controllers\Account\LoginController;
+use App\Http\Controllers\Account\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +20,9 @@ use App\Http\Controllers\Account\LoginController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('/account')->group(function(){
     Route::get('/register', [RegisterController::class, 'index'])->name('register.show');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
     Route::get('/login', [LoginController::class, 'index'])->name('login.show');
+
+    Route::delete('/logout', [LogoutController::class, 'logout'])->name('logout');
 });

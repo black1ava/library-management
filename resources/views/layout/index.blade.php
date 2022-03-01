@@ -18,15 +18,34 @@
     </button>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        
+        @auth
+          <li class="nav-item">
+            <a href="#" class="nav-link">Home</a>
+          </li>
+        @endauth
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="{{ route('login.show') }}" class="nav-link">Login</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('register.show') }}" class="nav-link">Register</a>
-        </li>
+        @auth
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              {{ Auth::user()->name}}
+            </a>
+            <div class="dropdown-menu">
+              <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
+              <form action="{{ route('logout') }}" method="post" id="logout">
+                @csrf
+                @method('delete')
+              </form>
+            </div>
+          </li>
+        @else
+          <li class="nav-item">
+            <a href="{{ route('login.show') }}" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('register.show') }}" class="nav-link">Register</a>
+          </li>
+        @endauth
       </ul>
     </div>
   </nav>
