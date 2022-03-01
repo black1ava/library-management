@@ -36,7 +36,11 @@
 <div class="form-group">
   <label>Profile photo</label>
   <div class="custom-file">
-    <input type="file" name="Photo" id="photo" class="custom-file-input">
-    <label for="photo" class="custom-file-label">Choose your profile photo</label>
+    <input type="file" name="photo" id="photo" class="custom-file-input">
+    <label for="photo" id="photo-label" class="custom-file-label"></label>
   </div>
 </div>
+<div class="app-image">
+  <img id="image">
+</div>
+<script src="/assets/js/image.js"></script>

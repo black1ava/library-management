@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use App\Http\Requests\AuthorPostRequest;
 
 class AuthorController extends Controller
 {
@@ -33,9 +34,29 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthorPostRequest $request)
     {
-        //
+        $req = $request->except('_token');
+
+        $author = new Author();
+
+        $author->name = $req['name'];
+        $author->gender = $req['gender'];
+        $author->dob = $req['dob'];
+        $author->pob = $req['pob'];
+        $author->address = $req['address'];
+        $author->phone = $req['phone'];
+        $author->email = $req['email'];
+
+        if($request->hasFile('photo') && $request->file('photo')->isValid()){
+           $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
+           $request->file('photo')->move(public_path('/images'), $file);
+           $author->photo = $file; 
+        }
+
+        $author->save();
+
+        return redirect()->route('author.index');
     }
 
     /**
