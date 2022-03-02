@@ -7,6 +7,7 @@ use App\Http\Controllers\Account\LoginController;
 use App\Http\Controllers\Account\LogoutController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookTypeController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,4 @@ Route::prefix('/account')->group(function(){
 
 Route::resource('/author', AuthorController::class);
 Route::resource('/book_type', BookTypeController::class);
+Route::resource('/book', BookController::class);
