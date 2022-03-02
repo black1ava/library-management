@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthorPostRequest;
+use Illuminate\Support\Facades\File;
 
 class AuthorController extends Controller
 {
@@ -50,6 +51,15 @@ class AuthorController extends Controller
         $author->email = $req['email'];
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
+
+            $path = public_path('/images');
+
+            if(!File::isDirectory($path)){
+
+                File::makeDirectory($path, 0777, true, true);
+        
+            }
+
            $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
            $request->file('photo')->move(public_path('/images'), $file);
            $author->photo = $file; 
