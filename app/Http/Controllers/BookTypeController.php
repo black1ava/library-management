@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BookType;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookTypePostRequest;
 
 class BookTypeController extends Controller
 {
@@ -14,7 +15,8 @@ class BookTypeController extends Controller
      */
     public function index()
     {
-        return view('book_type.index');
+        $bookTypes = BookType::all();
+        return view('book_type.index', compact('bookTypes'));
     }
 
     /**
@@ -24,7 +26,7 @@ class BookTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('book_type.create');
     }
 
     /**
@@ -33,9 +35,15 @@ class BookTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookTypePostRequest $request)
     {
-        //
+        $req = $request->except('_token');
+        $bookType = new BookType();
+        $bookType->name = $req['name'];
+        $bookType->description = $req['description'];
+        $bookType->save();
+
+        return redirect()->route('book_type.index')->with(['message' => 'Create new book type successfully']);
     }
 
     /**
@@ -46,7 +54,7 @@ class BookTypeController extends Controller
      */
     public function show(BookType $bookType)
     {
-        //
+        return view('book_type.show', compact('bookType'));
     }
 
     /**
@@ -57,7 +65,7 @@ class BookTypeController extends Controller
      */
     public function edit(BookType $bookType)
     {
-        //
+        return view('book_type.edit', compact('bookType'));
     }
 
     /**
@@ -67,9 +75,14 @@ class BookTypeController extends Controller
      * @param  \App\Models\BookType  $bookType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BookType $bookType)
+    public function update(BookTypePostRequest $request, BookType $bookType)
     {
-        //
+        $req = $request->except('_token');
+        $bookType->name = $req['name'];
+        $bookType->description = $req['description'];
+        $bookType->save();
+
+        return redirect()->route('book_type.index')->with(['message' => 'Update book type successfully']);
     }
 
     /**
@@ -80,6 +93,8 @@ class BookTypeController extends Controller
      */
     public function destroy(BookType $bookType)
     {
-        //
+        $bookType->delete();
+
+        return redirect()->route('book_type.index')->with(['message' => 'Delete a book type successfully']);
     }
 }

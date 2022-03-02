@@ -114,7 +114,9 @@ class AuthorController extends Controller
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
 
             $photo = $author->photo;
-            unlink(public_path('images/'.$photo));
+            if($photo !== null){
+                unlink(public_path('images/'.$photo));
+            }
 
             $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
             $request->file('photo')->move(public_path('/images'), $file);
