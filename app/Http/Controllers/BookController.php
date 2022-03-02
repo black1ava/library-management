@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\BookType;
+use App\Models\Author;
+use App\Http\Requests\BookPostRequest;
 
 class BookController extends Controller
 {
@@ -24,7 +27,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $bookTypes = BookType::all();
+        $authors = Author::all();
+        return view('book.create', compact('bookTypes', 'authors'));
     }
 
     /**
@@ -33,9 +38,32 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookPostRequest $request)
     {
-        //
+        $req = $request->except('only');
+
+        $book = new Book();
+        $book->title = $req['title'];
+        $book->publish_date = $req['publish_date'];
+        $book->num_of_pages = $req['num_of_pages'];
+        $book->num_copies = $req['num_copies'];
+        $book->edition = $req['edition'];
+        $book->publisher = $req['publisher'];
+        $book->book_source = $req['book_source'];
+        $book->remark = $req['remark'];
+
+        $bookType = BookType::findOrFail($req['book_type_id']);
+        $bookType->books()->save($book);
+         
+
+        $book->save();
+
+        foreach($req['authors'] as $authorId){
+            $author = Author::findOrFail($authorId);
+            $author->books()->save($book);
+        }
+
+        return redirect()->route('book.index');
     }
 
     /**
