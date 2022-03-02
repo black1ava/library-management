@@ -5,11 +5,11 @@
 <div class="form-group">
   <label>Gender</label>
   <div class="custom-control custom-radio">
-    <input type="radio" name="gender" id="male" value="male" @if($author->gender === 'male') checked @endif class="custom-control-input">
+    <input type="radio" name="gender" id="male" value="male" @if(isset($author) && $author->gender === 'male') checked @endif class="custom-control-input">
     <label for="male" class="custom-control-label">Male</label>
   </div>
   <div class="custom-control custom-radio">
-    <input type="radio" name="gender" id="female" value="female" @if($author->gender === 'female') checked @endif class="custom-control-input">
+    <input type="radio" name="gender" id="female" value="female" @if(isset($author) && $author->gender === 'female') checked @endif class="custom-control-input">
     <label for="female" class="custom-control-label">Female</label>
   </div>
 </div>
@@ -36,11 +36,11 @@
 <div class="form-group">
   <label>Profile photo</label>
   <div class="custom-file">
-    <input type="file" name="photo" id="photo" class="custom-file-input">
+    <input type="file" name="photo" id="photo" accept="image/*" class="custom-file-input">
     <label for="photo" id="photo-label" class="custom-file-label"></label>
   </div>
 </div>
 <div class="app-image">
-  <img src="{{ $author->photo ? '/images/'.$author->photo : '' }}" id="image">
+  <img src="{{ isset($author->photo) ? '/images/'.$author->photo : '' }}" id="image">
 </div>
 <script src="/assets/js/image.js"></script>

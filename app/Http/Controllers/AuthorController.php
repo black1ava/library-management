@@ -89,9 +89,31 @@ class AuthorController extends Controller
      * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(AuthorPostRequest $request, Author $author)
     {
-        //
+        $req = $request->except('_token');
+
+        $author->name = $req['name'];
+        $author->gender = $req['gender'];
+        $author->dob = $req['dob'];
+        $author->pob = $req['pob'];
+        $author->address = $req['address'];
+        $author->phone = $req['phone'];
+        $author->email = $req['email'];
+
+        if($request->hasFile('photo') && $request->file('photo')->isValid()){
+
+            $photo = $author->photo;
+            unlink(public_path('images/'.$photo));
+
+            $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
+            $request->file('photo')->move(public_path('/images'), $file);
+            $author->photo = $file; 
+         }
+ 
+         $author->save();
+ 
+         return redirect()->route('author.index');
     }
 
     /**
@@ -102,6 +124,11 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $photo = $author->photo;
+
+        unlink(public_path('images/'.$photo));
+        $author->delete();
+
+        return redirect()->route('author.index');
     }
 }

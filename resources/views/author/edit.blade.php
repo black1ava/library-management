@@ -5,7 +5,7 @@
       <div class="card-header">
         <h3>Edit author</h3>
       </div>
-      <form action="{{ route('author.update', $author) }}" method="post">
+      <form action="{{ route('author.update', $author) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         @include('author.form')
