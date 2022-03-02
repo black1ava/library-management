@@ -32,6 +32,15 @@
               <a href="{{ route('author.index') }}" class="dropdown-item">All</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              Book type
+            </a>
+            <div class="dropdown-menu">
+              <a href="{{ route('book_type.create') }}" class="dropdown-item">New book type</a>
+              <a href="{{ route('book_type.index') }}" class="dropdown-item">All</a>
+            </div>
+          </li>
         @endauth
       </ul>
       <ul class="navbar-nav">
