@@ -8,6 +8,7 @@ use App\Http\Controllers\Account\LogoutController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookTypeController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,4 @@ Route::prefix('/account')->group(function(){
 Route::resource('/author', AuthorController::class);
 Route::resource('/book_type', BookTypeController::class);
 Route::resource('/book', BookController::class);
+Route::resource('/student', StudentController::class);

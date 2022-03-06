@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use App\Http\Requests\AuthorPostRequest;
+use App\Http\Requests\StudentPostRequest;
 use Illuminate\Support\Facades\File;
-use Illuminate\Database\QueryException;
 
-class AuthorController extends Controller
+class StudentController extends Controller
 {
+
     public function __construct(){
         return $this->middleware('auth');
     }
@@ -20,8 +20,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
-        return view('author.index', compact('authors'));
+        $students = Student::all();
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -31,7 +31,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('author.create');
+        return view('student.create');
     }
 
     /**
@@ -40,22 +40,20 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AuthorPostRequest $request)
+    public function store(StudentPostRequest $request)
     {
         $req = $request->except('_token');
 
-        $author = new Author();
-
-        $author->name = $req['name'];
-        $author->gender = $req['gender'];
-        $author->dob = $req['dob'];
-        $author->pob = $req['pob'];
-        $author->address = $req['address'];
-        $author->phone = $req['phone'];
-        $author->email = $req['email'];
+        $student = new Student();
+        $student->name = $req['name'];
+        $student->gender = $req['gender'];
+        $student->dob = $req['dob'];
+        $student->pob =  $req['pob'];
+        $student->address = $req['address'];
+        $student->phone = $req['phone'];
+        $student->email = $req['email'];
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
-
             $path = public_path('/images');
 
             if(!File::isDirectory($path)){
@@ -66,85 +64,86 @@ class AuthorController extends Controller
 
            $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
            $request->file('photo')->move(public_path('/images'), $file);
-           $author->photo = $file; 
+           $student->photo = $file;  
         }
 
-        $author->save();
+        $student->save();
 
-        return redirect()->route('author.index');
+        return redirect()->route('student.index')->with('message', 'Add a new student successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Author $author)
+    public function show(Student $student)
     {
-        return view('author.show', compact('author'));
+        return view('student.show', compact('student'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Author $author)
+    public function edit(Student $student)
     {
-        return view('author.edit', compact('author'));
+        return view('student.edit', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(AuthorPostRequest $request, Author $author)
+    public function update(StudentPostRequest $request, Student $student)
     {
         $req = $request->except('_token');
-        
-        $author->name = $req['name'];
-        $author->gender = $req['gender'];
-        $author->dob = $req['dob'];
-        $author->pob = $req['pob'];
-        $author->address = $req['address'];
-        $author->phone = $req['phone'];
-        $author->email = $req['email'];
+
+        $student->name = $req['name'];
+        $student->gender = $req['gender'];
+        $student->dob = $req['dob'];
+        $student->pob =  $req['pob'];
+        $student->address = $req['address'];
+        $student->phone = $req['phone'];
+        $student->email = $req['email'];
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
 
-            $photo = $author->photo;
+            $photo = $student->photo;
             if($photo !== null){
                 unlink(public_path('images/'.$photo));
             }
 
             $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
             $request->file('photo')->move(public_path('/images'), $file);
-            $author->photo = $file; 
+            $student->photo = $file; 
          }
  
-         $author->save();
- 
-         return redirect()->route('author.index');
+
+        $student->save();
+
+        return redirect()->route('student.index')->with('message', 'Update a student successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy(Student $student)
     {
-        $photo = $author->photo;
+        $photo = $student->photo;
 
         unlink(public_path('images/'.$photo));
-        $author->delete();
+        $student->delete();
 
-        return redirect()->route('author.index');
+        return redirect()->route('student.index')->with('message', 'Delete a student successfully');
     }
 }

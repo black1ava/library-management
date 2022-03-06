@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/assets/css/index.css">
+  <script defer src="/assets/js/image.js"></script>
   <title>Document</title>
 </head>
 <body>
@@ -46,6 +47,13 @@
             <div class="dropdown-menu">
               <a href="{{ route('book.create') }}" class="dropdown-item">New book</a>
               <a href="{{ route('book.index') }}" class="dropdown-item">All</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">Student</a>
+            <div class="dropdown-menu">
+              <a href="{{ route('student.create') }}" class="dropdown-item">New student</a>
+              <a href="{{ route('student.index') }}" class="dropdown-item">All</a>
             </div>
           </li>
         @endauth

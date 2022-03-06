@@ -52,7 +52,7 @@
   <select name="book_type_id" id="book_type_id" class="custom-select @error('book_type') is-invalid @enderror">
     <option value="">Please select book type</option>
     @foreach($bookTypes as $bookType)
-      <option value="{{ $bookType->id }}" @if($book->bookType->id === $bookType->id) selected @endif>{{ $bookType->name }}</option>
+      <option value="{{ $bookType->id }}" @if(isset($book) && $book->bookType->id === $bookType->id) selected @endif>{{ $bookType->name }}</option>
     @endforeach
   </select>
   @error('book_type_id')
@@ -63,7 +63,7 @@
   <label>Authors</label>
   @foreach($authors as $author)
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" name="authors[]" id="{{ $author->id }}" value="{{ $author->id }}" @foreach($book->authors as $_author) @if($_author->id === $author->id) checked @endif @endforeach class="custom-control-input">
+      <input type="checkbox" name="authors[]" id="{{ $author->id }}" value="{{ $author->id }}" @if(isset($book)) @foreach($book->authors as $_author) @if($_author->id === $author->id) checked @endif @endforeach @endif class="custom-control-input">
       <label for="{{ $author->id }}" class="custom-control-label">{{ $author->name }}</label>
     </div>
   @endforeach
