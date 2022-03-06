@@ -23,6 +23,19 @@ class AuthorPostRequest extends FormRequest
      */
     public function rules()
     {
+
+        if($this->method() === 'PUT'){
+            return [
+                'name' => 'required',
+                'gender' => 'required',
+                'dob' => 'required',
+                'pob' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+                'email' => 'required'
+            ];
+        }
+
         return [
             'name' => 'required',
             'gender' => 'required',

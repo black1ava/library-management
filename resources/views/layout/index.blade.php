@@ -21,7 +21,7 @@
       <ul class="navbar-nav mr-auto">
         @auth
           <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">

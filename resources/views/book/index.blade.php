@@ -1,5 +1,10 @@
 @extends('layout.index')
-@section('content')
+@section('content')@if(Session::get('message') !== null)
+  <div class="alert alert-success alert-dismissible fade show">
+      <span>{{ Session::get('message')}}</span>
+      <button class="close" data-dismiss="alert">&times;</button>
+    </div>
+  @endif
   <div class="card">
     <div class="card-body">
       <div class="card-header d-flex justify-content-between align-items-center">

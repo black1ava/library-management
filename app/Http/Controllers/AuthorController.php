@@ -103,7 +103,7 @@ class AuthorController extends Controller
     public function update(AuthorPostRequest $request, Author $author)
     {
         $req = $request->except('_token');
-
+        
         $author->name = $req['name'];
         $author->gender = $req['gender'];
         $author->dob = $req['dob'];

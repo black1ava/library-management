@@ -86,7 +86,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $bookTypes = BookType::all();
+        $authors = Author::all();
+        return view('book.edit', compact('book', 'bookTypes', 'authors'));
     }
 
     /**
@@ -96,9 +98,28 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BookPostRequest $request, Book $book)
     {
-        //
+        $req = $request->except('_token');
+
+        $book->title = $req['title'];
+        $book->publish_date = $req['publish_date'];
+        $book->num_of_pages = $req['num_of_pages'];
+        $book->num_copies = $req['num_copies'];
+        $book->edition = $req['edition'];
+        $book->publisher = $req['publisher'];
+        $book->book_source = $req['book_source'];
+        $book->remark = $req['remark'];
+        $book->book_type_id = $req['book_type_id'];
+
+        $book->save();
+
+        foreach($req['authors'] as $authorId){
+            $author = Author::findOrFail($authorId);
+            $author->books()->sync($book);
+        }
+
+        return redirect()->route('book.index')->with('message', 'Update book successfully');
     }
 
     /**
@@ -109,6 +130,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect()->route('book.index')->with('message', 'Delete a book successfully');
     }
 }

@@ -24,8 +24,28 @@
       <li class="list-group-item">Remark: <strong>{{ $book->remark }}</strong></li>
     </ul>
     <br>
-    <a href="{{ route('author.edit', $author) }}" class="btn btn-primary">Edit</a>
-    <a href="{{ route('author.destroy', $author) }}" onclick="event.preventDefault();" class="btn btn-danger">Delete</a>
+    <a href="{{ route('book.edit', $book) }}" class="btn btn-primary">Edit</a>
+    <a href="{{ route('book.destroy', $book) }}" onclick="event.preventDefault();" class="btn btn-danger" data-toggle="modal" data-target="#delete-book">Delete</a>
+    <div class="modal fade" id="delete-book">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Are you sure you want to delete this book?</h4>
+          </div>
+          <div class="modal-body">
+            <p>After performing this action, this book will be delete permanently.</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete').submit();">Yes</button>
+            <button class="btn btn-primary" data-dismiss="modal">No</button>
+            <form action="{{ route('book.destroy', $book) }}" id="delete" method="post">
+              @csrf
+              @method('DELETE')
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 @endsection
