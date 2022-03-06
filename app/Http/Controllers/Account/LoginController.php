@@ -27,5 +27,7 @@ class LoginController extends Controller
         if(Auth::attempt($credential)){
             return redirect()->route('home');
         }
+
+        return redirect()->route('login.show')->with(['message' => 'Incorret email or password']);
     }
 }

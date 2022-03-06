@@ -6,6 +6,7 @@ use App\Models\Author;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthorPostRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\QueryException;
 
 class AuthorController extends Controller
 {

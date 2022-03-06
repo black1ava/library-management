@@ -17,7 +17,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('book.index');
+        $books = Book::all();
+        return view('book.index', compact('books'));
     }
 
     /**
@@ -60,10 +61,10 @@ class BookController extends Controller
 
         foreach($req['authors'] as $authorId){
             $author = Author::findOrFail($authorId);
-            $author->books()->save($book);
+            $author->books()->attach($book);
         }
 
-        return redirect()->route('book.index');
+        return redirect()->route('book.index')->with(['messagge' => 'Create new book successfully']);
     }
 
     /**
@@ -74,7 +75,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('book.show', compact('book'));
     }
 
     /**

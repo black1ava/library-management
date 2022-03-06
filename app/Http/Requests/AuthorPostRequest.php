@@ -29,8 +29,8 @@ class AuthorPostRequest extends FormRequest
             'dob' => 'required',
             'pob' => 'required',
             'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required'
+            'phone' => ['required', 'unique:authors'],
+            'email' => ['required', 'unique:authors']
         ];
     }
 
@@ -41,7 +41,9 @@ class AuthorPostRequest extends FormRequest
             'dob.required' => 'Please enter author date of birth',
             'pob.required' => 'Plerase enter author place of birth',
             'phone.required' => 'Please enter author phone number',
-            'email.required' => 'Please enter author email'
+            'email.required' => 'Please enter author email',
+            'phone.unique' => 'This number is already taken',
+            'email.unique' => 'This email is already taken'
         ];
     }
 }

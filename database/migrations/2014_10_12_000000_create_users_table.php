@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('dob');
             $table->string('pob');
             $table->string('address');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->string('photo')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

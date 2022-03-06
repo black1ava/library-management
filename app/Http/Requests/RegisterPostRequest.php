@@ -29,8 +29,8 @@ class RegisterPostRequest extends FormRequest
             'pob' => 'required',
             'dob' => 'required',
             'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
+            'phone' => ['required', 'unique:users'],
+            'email' => ['required', 'unique:users'],
             'password' => ['required', 'confirmed'],
             'password_confirmation' => 'required'
         ];
@@ -46,7 +46,11 @@ class RegisterPostRequest extends FormRequest
             'address.required' => 'Please enter your current address',
             'password.required' => 'Please enter your password',
             'password.confirmed' => 'Password is not matched',
-            'password_confirmation.required' => 'Please confirm your password'
+            'password_confirmation.required' => 'Please confirm your password',
+            'phone.required' => 'Please enter your phone number',
+            'phone.unique' => 'This number is already used',
+            'email.required' => 'Please enter your email',
+            'email.unique' => 'This email is already used'
         ];
     }
 }
