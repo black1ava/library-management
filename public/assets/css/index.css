@@ -3,6 +3,11 @@
   border-radius: 50%;
 }
 
+#image-profile {
+  width: 30%;
+  border-radius: 50%;
+}
+
 .app-image {
   display: flex;
   flex-direction: column;

@@ -23,7 +23,7 @@ class RegisterPostRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->method === 'PUT'){
+        if($this->method() === 'PUT'){
             return [
                 'name' => 'required',
                 'gender' => 'required',

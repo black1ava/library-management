@@ -11,6 +11,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,4 @@ Route::resource('/book', BookController::class);
 Route::resource('/student', StudentController::class);
 Route::resource('/borrow', BorrowController::class);
 Route::resource('/return', ReturnController::class);
+Route::resource('/account', AccountController::class);

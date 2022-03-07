@@ -5,7 +5,7 @@
       <div class="card-header">
         <h3>Login</h3>
       </div>
-      <form action="{{ route('register') }}" method="post">
+      <form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label for="name">Name</label>
@@ -76,6 +76,16 @@
           @error('password_confirmation')
             <small class="text-danger">{{ $message }}</small>
           @enderror
+        </div>
+        <div class="form-group">
+        <label for="photo">Profile picture</label>
+          <div class="custom-file">
+            <input type="file" name="photo" id="photo" class="custom-file-input">
+            <label for="photo" class="custom-file-label" accept="image/*" id="photo-label">Choose a profile picture</label>
+            <div class="app-image">
+              <img sid="image">
+            </div>
+          </div>
         </div>
         <button class="btn btn-primary">Register</button>
       </form>

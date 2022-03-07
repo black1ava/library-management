@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterPostRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class RegisterController extends Controller
 {
@@ -32,6 +33,22 @@ class RegisterController extends Controller
         $user->email = $req['email'];
         $user->address = $req['address'];
         $user->password = Hash::make($req['password']);
+
+        if($request->hasFile('photo') && $request->file('photo')->isValid()){
+
+            $path = public_path('/images');
+
+            if(!File::isDirectory($path)){
+
+                File::makeDirectory($path, 0777, true, true);
+        
+            }
+
+           $file = time().'.'.$request->file('photo')->getClientOriginalExtension();
+           $request->file('photo')->move(public_path('/images'), $file);
+           $user->photo = $file; 
+        }
+
         $user->save();
 
         if($user){

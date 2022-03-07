@@ -75,10 +75,11 @@
       <ul class="navbar-nav">
         @auth
           <li class="nav-item dropdown">
-            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              {{ Auth::user()->name}}
-            </a>
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name}}</a>
             <div class="dropdown-menu">
+              <a href="{{ route('account.show', Auth::user()->id) }}" class="dropdown-item">
+                <img src="/images/{{ Auth::user()->photo }}" id="image-profile"> Account
+              </a>
               <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
               <form action="{{ route('logout') }}" method="post" id="logout">
                 @csrf
