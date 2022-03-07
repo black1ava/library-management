@@ -97,9 +97,24 @@ class ReturnController extends Controller
      * @param  \App\Models\_Return  $_Return
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, _Return $_Return)
+    public function update(ReturnPostRequest $request, _Return $return)
     {
-        //
+        $req = $request->except('_token');
+
+        $return->return_date = $req['return_date'];
+        
+        $student = Student::findOrFail($req['student_id']);
+        $return->student()->associate($student);
+
+        $book = Book::findOrFail($req['book_id']);
+        $return->book()->associate($book);
+
+        $user = User::findOrFail(Auth::user()->id);
+        $return->user()->associate($user);
+
+        $return->save();
+
+        return redirect()->route('return.index')->with('message', 'Update a return record successfully');
     }
 
     /**
@@ -108,8 +123,10 @@ class ReturnController extends Controller
      * @param  \App\Models\_Return  $_Return
      * @return \Illuminate\Http\Response
      */
-    public function destroy(_Return $_Return)
+    public function destroy(_Return $return)
     {
-        //
+        $return->delete();
+
+        return redirect()->route('return.index')->with('message', 'Delete a record successfully');
     }
 }
