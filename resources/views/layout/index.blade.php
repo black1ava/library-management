@@ -56,6 +56,13 @@
               <a href="{{ route('student.index') }}" class="dropdown-item">All</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">Borrow</a>
+            <div class="dropdown-menu">
+              <a href="{{ route('borrow.create') }}" class="dropdown-item">New borrow</a>
+              <a href="{{ route('borrow.index') }}" class="dropdown-item">All</a>
+            </div>
+          </li>
         @endauth
       </ul>
       <ul class="navbar-nav">
