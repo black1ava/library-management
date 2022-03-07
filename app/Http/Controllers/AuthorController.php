@@ -71,7 +71,7 @@ class AuthorController extends Controller
 
         $author->save();
 
-        return redirect()->route('author.index');
+        return redirect()->route('author.index')->with('message', 'Create an author successfully');
     }
 
     /**
@@ -129,7 +129,7 @@ class AuthorController extends Controller
  
          $author->save();
  
-         return redirect()->route('author.index');
+         return redirect()->route('author.index')->with('message', 'Update an author successfully');;
     }
 
     /**
@@ -145,6 +145,6 @@ class AuthorController extends Controller
         unlink(public_path('images/'.$photo));
         $author->delete();
 
-        return redirect()->route('author.index');
+        return redirect()->route('author.index')->with('message', 'Delete an author successfully');;
     }
 }
