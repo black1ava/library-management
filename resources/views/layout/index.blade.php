@@ -63,6 +63,13 @@
               <a href="{{ route('borrow.index') }}" class="dropdown-item">All</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">Return</a>
+            <div class="dropdown-menu">
+              <a href="{{ route('return.create') }}" class="dropdown-item">New return</a>
+              <a href="{{ route('return.index') }}" class="dropdown-item">All</a>
+            </div>
+          </li>
         @endauth
       </ul>
       <ul class="navbar-nav">

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Borrow;
+use App\Models\_Return;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,9 @@ class User extends Authenticatable
 
     public function borrows(){
         return $this->hasMany(Borrow::class);
+    }
+
+    public function returns(){
+        return $this->hasMany(_Return::class);
     }
 }

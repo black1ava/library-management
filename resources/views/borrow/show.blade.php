@@ -22,6 +22,9 @@
         <li class="list-group-item">
           Return date: <strong>{{ $borrow->return_date }}</strong>
         </li>
+        <li class="list-group-item">
+          Remark: <strong>{{ $borrow->remark }}</strong>
+        </li>
       </ul>
       <div class="card-footer">
         <a href="{{ route('borrow.edit', $borrow) }}" class="btn btn-primary">Edit</a>
