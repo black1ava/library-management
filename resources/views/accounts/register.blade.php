@@ -83,7 +83,7 @@
             <input type="file" name="photo" id="photo" class="custom-file-input">
             <label for="photo" class="custom-file-label" accept="image/*" id="photo-label">Choose a profile picture</label>
             <div class="app-image">
-              <img sid="image">
+              <img id="image">
             </div>
           </div>
         </div>
