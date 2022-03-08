@@ -3,7 +3,7 @@
   <div class="card">
     <div class="card-body">
       <div class="card-header">
-        <h3>Login</h3>
+        <h3>Register</h3>
       </div>
       <form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
         @csrf
